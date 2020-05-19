@@ -1,7 +1,8 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const uglify = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -33,7 +34,10 @@ module.exports = {
           chunks: 'all'
         }
       }
-    }
+    },
+    minimizer: [
+      new UglifyJsPlugin()
+    ]
   },
   resolve: {
     extensions: ['.js', '.ts', '.json']
@@ -54,6 +58,14 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ['css-loader'],
+          publicPath: path.join(__dirname, '/')
+        })
+      },
+      {
         test: /\.(png|jpg|gif)$/,
         use: [{
           loader: 'url-loader',
@@ -67,9 +79,12 @@ module.exports = {
   plugins: [
     new htmlWebpackPlugin({
       filename: "index.html",  //打包后的文件名
-      template: path.join(__dirname, "./index.html")  //要打包文件的路径
+      template: path.join(__dirname, "./index.html"),  //要打包文件的路径
+      inject: true
     }),
     new CleanWebpackPlugin(),
-    new uglify()
+    new ExtractTextPlugin({
+      filename: 'index.[hash:8].css'
+    })
   ],
 };

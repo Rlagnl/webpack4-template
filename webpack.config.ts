@@ -1,10 +1,11 @@
-const path = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+import path from 'path'
+import webpack from "webpack"
+import htmlWebpackPlugin from 'html-webpack-plugin'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-module.exports = {
+const config: webpack.Configuration = {
   mode: 'development',
   //entry为入口,webpack从这里开始编译
   entry: [
@@ -87,4 +88,6 @@ module.exports = {
       filename: 'index.[hash:8].css'
     })
   ],
-};
+}
+
+export default config

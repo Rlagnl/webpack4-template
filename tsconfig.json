@@ -15,12 +15,21 @@
       "dom"
     ],
     "strict": true,
-    "sourceMap": true,
     "typeRoots": ["node_modules/@types"],
     // 支持在 CommonJs 模块下使用 import 
     "esModuleInterop": true,
     // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查
     "allowSyntheticDefaultImports": true,
+    // 关闭 this 类型注解提示
+    "noImplicitThis": false,
+    // 允许隐式的 any 类型
+    "noImplicitAny": false,
+    // 删除注释 
+    "removeComments": true,
+    // 生成目标文件的sourceMap文件
+    "sourceMap": true,
+    // 开启null、undefined检测
+    "strictNullChecks": true,
     "baseUrl": "./",
     "paths": {
       "@root/*": ["./*"],

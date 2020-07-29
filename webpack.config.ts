@@ -9,7 +9,6 @@ const config: webpack.Configuration = {
   mode: 'development',
   //entry为入口,webpack从这里开始编译
   entry: [
-    "babel-polyfill",
     path.join(__dirname, './src/index.ts')
   ],
   //output为输出 path代表路径 filename代表文件名称
